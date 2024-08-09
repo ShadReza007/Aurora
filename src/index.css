@@ -60,6 +60,7 @@ h1 {
 }
 
 .container {
+  position: fixed;
   max-width: 700px;
   height: 700px;
   margin: auto;
@@ -72,11 +73,13 @@ h1 {
 }
 
 .App .top {
+  z-index: 5;
   width: 100%;
   margin: 1rem auto;
 }
 
 .App .description {
+  z-index: 5;
   position: relative;
   right: -90%;
   transform-origin: 0 0;
@@ -84,6 +87,7 @@ h1 {
 }
 
 .App .bottom {
+  z-index: 5;
   display: flex;
   justify-content: space-evenly;
   text-align: center;
@@ -98,9 +102,26 @@ h1 {
   font-weight: 700;
 }
 
+.autocomplete-list{
+  width: 30%;
+  background-color: rgba(255,255,255,0.01);
+  color: #fff;
+  z-index: 50;
+  list-style-type: none;
+  margin-left: 317px;
+  margin-top: 1rem;
+}
 
+.autocomplete-list:hover{
+  cursor: pointer;
+}
 
-
+.autocomplete-item{
+  display: flex;
+  padding-left:10px;
+  font-size: 20px;
+  padding: 2px;
+}
 
 
 
