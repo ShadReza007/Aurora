@@ -67,19 +67,22 @@ function App() {
           onKeyPress={handleKeyPress}
           placeholder='Enter Location'
           type='text'
-        />
+          />
+         
+        <div className='parent'>
         {suggestions.length > 0 && (
           <ul className='autocomplete-list'>
             {suggestions.map((suggestion) => (
               <li className='autocomplete-item'
-                key={suggestion.id}
-                onClick={() => searchLocation(suggestion.name)}
+              key={suggestion.id}
+              onClick={() => searchLocation(suggestion.name)}
               >
                 {suggestion.name}, {suggestion.sys.country}
               </li>
             ))}
           </ul>
         )}
+        </div>
       </div>
 
       <div className='container'>
