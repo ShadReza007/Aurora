@@ -22,17 +22,17 @@ h1 {
   font-size: 6rem;
 }
 
-.App {
+.app {
   width: 100%;
   height: 100vh;
   position: relative;
-  background-color: rgba(0,0,0,0.4);
-  color: #fff;
+  color: #f8f8f0;
+  transition: all 0.3s ease-in-out;
 }
 
-.App:before {
+.app:before {
   content: '';
-  background: url('./assets/pexels-pixabay-220759.jpg') no-repeat center center/cover;
+  background: url('./assets/lightning-thunder-sky-lightning-strikes-wallpaper-preview.jpg') no-repeat center center/cover;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -41,12 +41,16 @@ h1 {
   z-index: -1;
 }
 
-.App .search {
+.app.searching:before {
+  filter: blur(8px);
+}
+
+.app .search {
   text-align: center;
   padding: 1rem;
 }
 
-.App input {
+.app input {
   padding: .7rem 1.5rem;
   font-size: 1.2rem;
   border-radius: 25px;
@@ -59,42 +63,31 @@ h1 {
   color: #f8f8f8;
 }
 
-.blur-background {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* For Safari */
-}
 .container {
-  position: fixed;
   max-width: 700px;
   height: 700px;
   margin: auto;
-  padding: 2rem 4rem;
+  padding: 0 1rem;
   position: relative;
   top: 10%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 10%;
 }
 
-.App .top {
-  z-index: 5;
+.app .top {
   width: 100%;
   margin: 1rem auto;
 }
 
-.App .description {
-  z-index: 5;
+.app .description {
   position: relative;
   right: -90%;
   transform-origin: 0 0;
   transform: rotate(269deg);
 }
 
-.App .bottom {
-  z-index: 5;
+.app .bottom {
   display: flex;
   justify-content: space-evenly;
   text-align: center;
@@ -109,34 +102,31 @@ h1 {
   font-weight: 700;
 }
 
-.autocomplete-list{
+.autocomplete-list {
   width: 30%;
-  background-color: rgba(255,255,255,0.01);
+  background-color: rgba(255,255,255,0.2);
   color: #fff;
   z-index: 50;
   list-style-type: none;
-  margin-top: 1rem;
+  margin: 1rem auto;
+  border-radius: 12px;
+  padding: 0.5rem;
 }
 
-.autocomplete-list:hover{
+.autocomplete-item {
+  padding: 0.5rem;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.autocomplete-item{
-  padding-left:10px;
-  font-size: 20px;
-  padding: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.autocomplete-item:hover {
+  background-color: rgba(255,255,255,0.3);
 }
 
-.parent{
+.parent {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
-
-
-

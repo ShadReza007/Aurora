@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import './index.css';
 
 function App() {
   const [data, setData] = useState({});
   const [location, setLocation] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
   
   const apiKey = '4df984d91c4f6f81447eb1cd17503295';
 
@@ -26,6 +28,7 @@ function App() {
   }, [location]);
 
   const searchLocation = (city) => {
+    setIsSearching(true);
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
     axios.get(url)
       .then((response) => {
@@ -35,31 +38,22 @@ function App() {
       })
       .catch((error) => {
         alert(error.response.data.message);
+        setIsSearching(false);
       });
-  };
-
-  // Debounce function
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        func(...args);
-      }, delay);
-    };
   };
 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
-      debouncedSearchLocation(location);
+      searchLocation(location);
     }
   };
 
-  // Create a debounced version of the searchLocation function
-  const debouncedSearchLocation = useCallback(debounce(searchLocation, 500), []);
+  const handleSuggestionClick = (city) => {
+    searchLocation(city);
+  };
 
   return (
-    <div className="App">
+    <div className={`app ${isSearching ? 'searching' : ''}`}>
       <div className='search'>
         <input
           value={location}
@@ -67,7 +61,7 @@ function App() {
           onKeyPress={handleKeyPress}
           placeholder='Enter Location'
           type='text'
-          />
+        />
          
         <div className='parent'>
         {suggestions.length > 0 && (
@@ -75,7 +69,7 @@ function App() {
             {suggestions.map((suggestion) => (
               <li className='autocomplete-item'
               key={suggestion.id}
-              onClick={() => searchLocation(suggestion.name)}
+              onClick={() => handleSuggestionClick(suggestion.name)}
               >
                 {suggestion.name}, {suggestion.sys.country}
               </li>
